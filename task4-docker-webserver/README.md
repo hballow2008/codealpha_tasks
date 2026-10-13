@@ -13,7 +13,7 @@ Option 1, with Docker commands:
     docker build -t habeeb-web:1.0 .
     docker run -d --name mywebsserver -p 8080:80 --restart unless-stopped habeeb-web:1.0
 
-Option 2, with Docker Compose (builds and runs in one step): [Preferred]
+Option 2, with Docker Compose (builds and runs in one step): ** Preferred ** 
     docker compose up -d --build
 
 Then open http://localhost:8080. Stop with `docker rm -f myweb` or `docker compose down`.
