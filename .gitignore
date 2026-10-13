@@ -1,0 +1,16 @@
+# Gradle / Java
+.gradle/
+build/
+*.class
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
