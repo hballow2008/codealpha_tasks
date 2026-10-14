@@ -5,18 +5,18 @@ This task runs an Nginx web server inside a Docker container, serving a custom w
 ### Files
 - `index.html`: the web page served on localhost:8080.
 - `Dockerfile`: builds a custom image from `nginx:1.27-alpine`, copies `index.html` into Nginx's web folder inside the container (`/usr/share/nginx/html/`), and adds a health check that requests the home page every 30 seconds.
-- `docker-compose.yml`: defines the build, port mapping (8080:80) and restart policy, so the whole setup starts/ends with one command - dpcker compose up/down.
+- `docker-compose.yml`: defines the build, port mapping (8080:80) and restart policy, so the whole setup starts/ends with one command - docker compose up/down.
 
 ### How to run
 
 Option 1, with Docker commands:
     docker build -t habeeb-web:1.0 .
-    docker run -d --name mywebsserver -p 8080:80 --restart unless-stopped habeeb-web:1.0
+    docker run -d --name habeeb-web -p 8080:80 --restart unless-stopped habeeb-web:1.0
 
-Option 2, with Docker Compose (builds and runs in one step): ** Preferred ** 
+Option 2, with Docker Compose (builds and runs in one step): **(preferred)**
     docker compose up -d --build
 
-Then open http://localhost:8080. Stop with `docker rm -f myweb` or `docker compose down`.
+Then open http://localhost:8080. Stop with `docker rm -f habeeb-web` or `docker compose down`.
 
 ### Monitoring
 - `docker ps` shows the container status as healthy or unhealthy.
