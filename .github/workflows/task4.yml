@@ -1,0 +1,53 @@
+name: Task 4 Docker
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'task4-docker-webserver/**'
+      - '.github/workflows/task4.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'task4-docker-webserver/**'
+      - '.github/workflows/task4.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: task4-docker-webserver
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build and start the container
+        run: docker compose up -d --build
+
+      - name: Check the page is served
+        run: |
+          for i in $(seq 1 10); do
+            curl -fs http://localhost:8080 | grep -q "Habeeb's DevOps Web Server" && exit 0
+            sleep 2
+          done
+          echo "Page not served" && exit 1
+
+      - name: Wait for the health check to pass
+        run: |
+          for i in $(seq 1 30); do
+            status=$(docker inspect --format '{{.State.Health.Status}}' habeeb-web)
+            echo "Health: $status"
+            [ "$status" = "healthy" ] && exit 0
+            sleep 3
+          done
+          exit 1
+
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose logs
+
+      - name: Stop the container
+        if: always()
+        run: docker compose down

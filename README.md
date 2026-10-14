@@ -1,6 +1,7 @@
 # DevOps Tasks
 
 ![Java CI](https://github.com/hballow2008/devops-tasks/actions/workflows/ci.yml/badge.svg)
+![Task 4 Docker](https://github.com/hballow2008/devops-tasks/actions/workflows/task4.yml/badge.svg)
 
 A set of hands-on DevOps tasks covering containerisation, automated testing and continuous integration. Each task lives in its own folder with everything needed to build and run it.
 
